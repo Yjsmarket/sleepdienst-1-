@@ -730,6 +730,10 @@ a.contact-block:hover { border-color: var(--orange); transform: translateX(4px);
 
 /* ---------- Mobile nav drawer ---------- */
 @media (max-width: 960px) {
+  /* backdrop-filter maakt #header de containing block voor position:fixed,
+     waardoor de drawer maar zo hoog werd als de header. Op mobiel uitzetten. */
+  #header { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--white); }
+
   .nav-overlay { display: block; pointer-events: none; }
   #header.menu-open .nav-overlay { pointer-events: auto; }
 
