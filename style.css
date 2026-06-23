@@ -486,17 +486,38 @@ a.topbar-item:hover { color: var(--orange-2); }
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
 
 /* ---------- Werkgebieden ---------- */
-.regions-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
-.region-card {
-  display: grid; place-items: center;
+/* Grouped werkgebieden */
+.geo-groups { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.geo-group {
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.1);
-  border-radius: var(--radius-sm); padding: 24px 14px;
-  font-family: var(--display); font-weight: 700; font-size: 1.02rem;
-  color: var(--white); transition: var(--t); text-align: center;
+  border-radius: var(--radius); padding: 22px 22px 24px;
+  transition: var(--t);
 }
-.region-card:hover { background: var(--orange); border-color: var(--orange); transform: translateY(-4px); box-shadow: 0 12px 30px rgba(255,107,26,0.35); }
-.regions-note { text-align: center; margin-top: 30px; color: rgba(255,255,255,0.75); }
+.geo-group:hover { border-color: rgba(255,107,26,0.45); background: rgba(255,255,255,0.06); }
+.geo-region {
+  font-family: var(--display); font-weight: 800; font-size: 1.05rem;
+  color: var(--white); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+  padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.geo-region::before {
+  content: ''; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--orange); flex-shrink: 0;
+}
+.geo-region span { margin-left: auto; font-size: 1rem; }
+.geo-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.geo-chips span {
+  display: inline-flex; align-items: center;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.85);
+  font-size: 0.84rem; font-weight: 500;
+  padding: 6px 12px; border-radius: 999px;
+  transition: var(--t);
+}
+.geo-chips span:hover { background: var(--orange); border-color: var(--orange); color: var(--white); }
+.regions-note { text-align: center; margin-top: 34px; color: rgba(255,255,255,0.75); }
 .regions-note a { color: var(--orange-2); font-weight: 600; }
 .regions-note strong { color: var(--white); }
 
@@ -703,7 +724,7 @@ a.contact-block:hover { border-color: var(--orange); transform: translateX(4px);
   .services-grid { grid-template-columns: repeat(2, 1fr); }
   .business-grid { grid-template-columns: repeat(2, 1fr); }
   .reviews-grid { grid-template-columns: repeat(2, 1fr); }
-  .regions-grid { grid-template-columns: repeat(3, 1fr); }
+  .geo-groups { grid-template-columns: repeat(2, 1fr); }
   .over-grid, .offerte-grid, .contact-grid, .spoed-inner { grid-template-columns: 1fr; gap: 40px; }
   .over-stat-card { right: 0; }
   .spoed-visual { order: -1; }
@@ -715,7 +736,7 @@ a.contact-block:hover { border-color: var(--orange); transform: translateX(4px);
   .topbar-hide-mobile { display: none; }
   .pricing-grid { grid-template-columns: 1fr; max-width: 420px; }
   .reviews-grid { grid-template-columns: 1fr; }
-  .regions-grid { grid-template-columns: repeat(2, 1fr); }
+  .geo-groups { grid-template-columns: 1fr; }
   .form-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
   .mobile-bar { display: flex; }
