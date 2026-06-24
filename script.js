@@ -102,8 +102,15 @@
     }, 4500);
   }
 
-  /* ---- Form handling ---- */
-  function handleForm(form, msg) {
+  /* ---- Form handling: stuur ingevulde gegevens naar WhatsApp ---- */
+  var WHATSAPP_NUMBER = '31620201777';
+
+  function fieldVal(form, name) {
+    var el = form.querySelector('[name="' + name + '"]');
+    return el && el.value ? el.value.trim() : '';
+  }
+
+  function handleForm(form, opts) {
     if (!form) return;
     form.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -111,25 +118,46 @@
         form.reportValidity();
         return;
       }
-      var btn = form.querySelector('[type="submit"], button:not([type])');
-      var label;
-      if (btn) {
-        label = btn.textContent;
-        btn.disabled = true;
-        btn.textContent = 'Verzenden…';
-      }
-      // Simulate async submission (replace with real endpoint when available)
-      setTimeout(function () {
-        form.reset();
-        if (btn) { btn.disabled = false; btn.textContent = label; }
-        showToast(msg);
-      }, 700);
+      // Bouw een net WhatsApp-bericht op uit de ingevulde velden
+      var lines = [opts.intro];
+      opts.fields.forEach(function (f) {
+        var v = fieldVal(form, f.name);
+        if (v) lines.push(f.label + ': ' + v);
+      });
+      var text = encodeURIComponent(lines.join('\n'));
+      var url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + text;
+
+      showToast(opts.toast);
+      // open WhatsApp (nieuw tabblad/app)
+      window.open(url, '_blank');
+      form.reset();
     });
   }
-  handleForm(document.getElementById('quick-form'),
-    '✅ Bedankt! Wij bellen u binnen 2 minuten terug.');
-  handleForm(document.getElementById('offerte-form'),
-    '✅ Offerte aanvraag ontvangen! U hoort snel van ons.');
+
+  handleForm(document.getElementById('quick-form'), {
+    intro: 'Hallo, ik heb met spoed hulp nodig via Autoredder.nl:',
+    toast: '✅ WhatsApp wordt geopend — tik op verzenden om te versturen.',
+    fields: [
+      { name: 'naam', label: 'Naam' },
+      { name: 'telefoon', label: 'Telefoon' },
+      { name: 'locatie', label: 'Locatie' },
+      { name: 'dienst', label: 'Dienst' }
+    ]
+  });
+
+  handleForm(document.getElementById('offerte-form'), {
+    intro: 'Hallo, ik wil graag een offerte aanvragen via Autoredder.nl:',
+    toast: '✅ WhatsApp wordt geopend — tik op verzenden om te versturen.',
+    fields: [
+      { name: 'naam', label: 'Naam' },
+      { name: 'telefoon', label: 'Telefoon' },
+      { name: 'email', label: 'E-mail' },
+      { name: 'dienst', label: 'Dienst' },
+      { name: 'van', label: 'Ophaaladres' },
+      { name: 'naar', label: 'Bestemming' },
+      { name: 'bericht', label: 'Toelichting' }
+    ]
+  });
 
   /* ---- FAQ: close siblings for accordion feel ---- */
   var faqList = document.getElementById('faq-list');
