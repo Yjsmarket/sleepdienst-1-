@@ -938,3 +938,13 @@ a.contact-block:hover { border-color: var(--orange); transform: translateX(4px);
 .gem-photo-placeholder span { font-size: 2.4rem; }
 
 @media (max-width: 768px) { .gem-split { grid-template-columns: 1fr; gap: 28px; } .gem-photo { order: -1; } }
+
+/* Gemeente-banner compacter op mobiel */
+@media (max-width: 768px) {
+  .gem-hero .container { padding-top: 34px; padding-bottom: 40px; }
+  .gem-hero h1 { font-size: 1.9rem; }
+  .gem-hero .lead-light { font-size: 1rem; }
+  .gem-hero-media img { opacity: 0.22; }
+  .gem-quick { gap: 14px; }
+  .gem-quick-item { font-size: 0.85rem; }
+}
