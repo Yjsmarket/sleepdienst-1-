@@ -969,3 +969,23 @@ a.contact-block:hover { border-color: var(--orange); transform: translateX(4px);
   .gem-quick { gap: 14px; }
   .gem-quick-item { font-size: 0.85rem; }
 }
+
+/* ---------- Google reviews badge ---------- */
+.google-badge {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 9px 18px 9px 12px;
+  box-shadow: 0 8px 24px -10px rgba(10,26,51,0.25);
+  margin-bottom: 20px;
+  transition: var(--t);
+}
+.google-badge:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -10px rgba(10,26,51,0.3); }
+.google-badge svg { flex-shrink: 0; }
+.google-badge-text { display: flex; flex-direction: column; line-height: 1.25; }
+.google-badge-text strong { font-family: var(--display); font-weight: 800; font-size: 0.95rem; color: var(--navy); }
+.google-stars { font-size: 0.85rem; color: #FBBC05; letter-spacing: 1px; }
+.google-stars em { color: var(--gray); font-style: normal; font-size: 0.8rem; letter-spacing: 0; margin-left: 4px; }
+/* op donkere achtergrond (indien geplaatst) */
+.section-dark .google-badge { background: rgba(255,255,255,0.95); }
